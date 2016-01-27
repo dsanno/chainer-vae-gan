@@ -1,0 +1,7 @@
+*.pyc
+dataset/*
+!dataset/.gitkeep
+image/*
+!image/.gitkeep
+model/*
+!model/.gitkeep
