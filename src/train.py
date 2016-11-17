@@ -11,7 +11,7 @@ import chainer.functions as F
 import chainer.links as L
 import net
 
-parser = argparse.ArgumentParser(description='DCGAN trainer for ETL9')
+parser = argparse.ArgumentParser(description='VAE and DCGAN trainer')
 parser.add_argument('--gpu', '-g', default=-1, type=int,
                     help='GPU ID (negative value indicates CPU)')
 parser.add_argument('--input', '-i', default=None, type=str,
@@ -140,10 +140,10 @@ def train(enc, gen, dis, optimizer_enc, optimizer_gen, optimizer_dis, epoch_num,
             x_batch.fill(0)
             for j, p in enumerate(perm[i:i + BATCH_SIZE]):
                 image = images[p]
-                offset_x = np.random.randint(8) + 13
-                offset_y = np.random.randint(8) + 33
-                w = 144
-                h = 144
+                offset_x = np.random.randint(8) + 37
+                offset_y = np.random.randint(8) + 68
+                w = 96
+                h = 96
                 with io.BytesIO(image) as b:
                     pixels = np.asarray(Image.open(b).convert('RGB').crop((offset_x, offset_y, offset_x + w, offset_y + h)).resize((image_size, image_size)))
                     pixels = pixels.astype(np.float32).transpose((2, 0, 1)).reshape((3, image_size, image_size))
